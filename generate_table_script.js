@@ -2,13 +2,15 @@ import pg from "pg";
 
 const connectionString = process.env.DATABASE_CONNECTION_STRING;
 
-const pool = new pg.Pool({
+export const pool = new pg.Pool({
   // Pass the connection string to the pool, so it knows how to connect to your database
   connectionString,
   ssl: {
     rejectUnauthorized: false, // Use with caution
   },
 });
+
+
 
 async function generateDatabase() {
   try {
@@ -165,9 +167,9 @@ values
     console.log("Database generated successfully");
   } catch (error) {
     console.error("Could not generate database: ", error);
-  } finally {
-    await pool.end();
-  }
+  } //finally {
+   // await pool.end();
+  //}
 }
 
 await generateDatabase();
