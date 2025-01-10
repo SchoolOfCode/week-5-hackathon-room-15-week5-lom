@@ -2,6 +2,8 @@ import express from "express";
 
 import {
   fetchAllCountries,
+  fetchAllCapitals,
+  fetchCapitalsByCountryName,
 } from "./databaseFunctions.js";
 
 const app = express();
@@ -17,7 +19,17 @@ app.get('/countries', async function(req, res){
   console.log(countries);
 });
 
+app.get('/allCapitals', async function(req, res){
+  const city = await fetchAllCapitals();
+  res.json(city);
+  console.log(city);
+});
 
+app.get('/capitals', async function (req, res) {
+  const name = req.query.name;
+  const capitalByName = await fetchCapitalsByCountryName(name)
+  res.json(capitalByName)
+});
 
 
 //
